@@ -1355,3 +1355,45 @@ textarea {
     max-height: 95vh;
   }
 }
+
+/* footer base */
+.app-footer {
+  width: 100%;
+  padding: 12px 16px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+
+  background: var(--bg-secondary, #f9fafb);
+  color: var(--text-secondary, #6b7280);
+
+  border-top: 1px solid var(--border, #e5e7eb);
+}
+
+/* dark mode */
+[data-theme="dark"] .app-footer {
+  background: #111827;
+  color: #9ca3af;
+  border-top: 1px solid #1f2937;
+}
+
+/* high contrast */
+[data-theme="high-contrast"] .app-footer {
+  background: #000000;
+  color: #ffffff;
+  border-top: 1px solid #ffffff;
+}
+/* footer responsiveness */
+@media (max-width: 768px) {
+  .app-footer {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-footer {
+    font-size: 11px;
+    padding: 8px;
+  }
+}

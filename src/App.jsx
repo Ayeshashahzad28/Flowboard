@@ -34,6 +34,17 @@ function AuthedApp() {
   );
 }
 
+function AuthedApp() {
+  return (
+    <div className="app-shell">
+      ...
+      <footer className="app-footer">
+        &copy; 2026 Flowboard. All Rights Reserved.
+      </footer>
+    </div>
+  )
+}
+
 function Gate() {
   const { currentUser } = useAuth();
   if (!currentUser) return <Login />;
