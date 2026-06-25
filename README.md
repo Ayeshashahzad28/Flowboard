@@ -67,23 +67,21 @@ It is designed for **learning, portfolio, and interview demonstration purposes**
 
 > These accounts are intentionally public for testing.
 
+
+
 ---
 
-# ⚙️ Installation & Setup
-
-```bash
-npm install
-npm run dev
-
-🛠️ Tech Stack
+### 🛠️ Tech Stack
 - React 19
 - Vite
 - Plain CSS
 - LocalStorage API
 
-📌 Project Purpose
+---
 
-This project demonstrates:
+### 📌 Project Purpose
+
+ This project demonstrates:
 
 - Component-based React architecture
 - Context API state management
@@ -91,13 +89,17 @@ This project demonstrates:
 - Local storage persistence
 - Frontend-only application design
 
-🚫 Limitations
+---
+
+### 🚫 Limitations
 - No backend or database
 - No real authentication/security
 - Data stored in browser only
 - Not suitable for production use
 
+---
+
 ## 👩‍💻 Author
 
 **Ayesha Shahzad**  
-MERN Stack Developer  
+MERN Stack Developer
