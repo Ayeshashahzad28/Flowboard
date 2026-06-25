@@ -1,197 +1,224 @@
-import { makeId } from './id'
-import { shiftDate, todayISO } from './dateUtils'
-import { ROLES } from './permissions'
+import { makeId } from "./id";
+import { shiftDate, todayISO } from "./dateUtils";
+import { ROLES } from "./permissions";
 
-export const AVATAR_PALETTE = ['#2E5EAA', '#B7791F', '#2F855A', '#9B2C8F', '#C53030', '#1A7A8A']
+export const AVATAR_PALETTE = [
+  "#2E5EAA",
+  "#B7791F",
+  "#2F855A",
+  "#9B2C8F",
+  "#C53030",
+  "#1A7A8A",
+];
 
 export function seedUsers() {
   return [
-    { id: 'u_owner', username: 'owner', password: 'owner123', name: 'Ayesha Shahzad', role: ROLES.OWNER, color: AVATAR_PALETTE[0] },
-    { id: 'u_editor', username: 'editor', password: 'editor123', name: 'Sara Khan', role: ROLES.EDITOR, color: AVATAR_PALETTE[1] },
-    { id: 'u_editor2', username: 'bilal', password: 'bilal123', name: 'Bilal Ahmed', role: ROLES.EDITOR, color: AVATAR_PALETTE[2] },
-    { id: 'u_viewer', username: 'viewer', password: 'viewer123', name: 'Mehak Raza', role: ROLES.VIEWER, color: AVATAR_PALETTE[3] }
-  ]
+    {
+      id: "u_owner",
+      username: "owner",
+      password: "owner123",
+      name: "Ayesha Shahzad",
+      role: ROLES.OWNER,
+      color: AVATAR_PALETTE[0],
+    },
+    {
+      id: "u_editor",
+      username: "editor",
+      password: "editor123",
+      name: "Sara Khan",
+      role: ROLES.EDITOR,
+      color: AVATAR_PALETTE[1],
+    },
+    {
+      id: "u_editor2",
+      username: "bilal",
+      password: "bilal123",
+      name: "Bilal Ahmed",
+      role: ROLES.EDITOR,
+      color: AVATAR_PALETTE[2],
+    },
+    {
+      id: "u_viewer",
+      username: "viewer",
+      password: "viewer123",
+      name: "Mehak Raza",
+      role: ROLES.VIEWER,
+      color: AVATAR_PALETTE[3],
+    },
+  ];
 }
 
 // Fake collaborators used only to simulate live multi-user presence/editing.
 // They never authenticate; they just animate presence + occasional task nudges.
 export const BOT_PERSONAS = [
-  { id: 'bot_1', name: 'Ayesha (bot)', color: '#C53030' },
-  { id: 'bot_2', name: 'Usman (bot)', color: '#1A7A8A' }
-]
+  { id: "bot_1", name: "Ayesha (bot)", color: "#C53030" },
+  { id: "bot_2", name: "Usman (bot)", color: "#1A7A8A" },
+];
 
 export function seedTasks() {
-  const today = todayISO()
+  const today = todayISO();
   const mk = (overrides) => ({
-    id: makeId('task'),
-    title: 'Untitled task',
-    description: '',
-    priority: 'Medium',
+    id: makeId("task"),
+    title: "Untitled task",
+    description: "",
+    priority: "Medium",
     dueDate: shiftDate(today, 3),
     assignees: [],
     subtasks: [],
-    columnId: 'todo',
+    columnId: "todo",
     order: 0,
-    timeTracking: { totalSeconds: 0, isRunning: false, startedAt: null, runningBy: null },
+    timeTracking: {
+      totalSeconds: 0,
+      isRunning: false,
+      startedAt: null,
+      runningBy: null,
+    },
     createdAt: Date.now(),
     completedAt: null,
     lockedBy: null,
     lockedAt: null,
-    ...overrides
-  })
+    ...overrides,
+  });
 
   return [
     mk({
-      title: 'Define sprint goals',
-      description: 'Draft the goals for this two-week sprint and align with stakeholders before kickoff.',
-      priority: 'High',
+      title: "Full Stack Web Development",
+      description:
+        "Build a basic full stack app with frontend and backend connection.",
+      priority: "High",
       dueDate: shiftDate(today, -1),
-      assignees: ['u_owner'],
+      assignees: ["u_owner"],
+      tech: ["React", "Node.js", "Express", "MongoDB"],
       subtasks: [
-        { id: makeId('sub'), title: 'Collect feedback from last retro', done: true },
-        { id: makeId('sub'), title: 'Draft goal statement', done: true },
-        { id: makeId('sub'), title: 'Review with team lead', done: false }
+        { id: makeId("sub"), title: "Setup frontend project", done: true },
+        { id: makeId("sub"), title: "Create backend API", done: true },
+        {
+          id: makeId("sub"),
+          title: "Connect frontend and backend",
+          done: false,
+        },
       ],
-      columnId: 'todo',
-      order: 0
-    }),
-    mk({
-      title: 'Set up CI pipeline',
-      description: 'Automate build, lint and test on every pull request.',
-      priority: 'Medium',
-      dueDate: shiftDate(today, 5),
-      assignees: ['u_editor2'],
-      subtasks: [
-        { id: makeId('sub'), title: 'Choose CI provider', done: true },
-        { id: makeId('sub'), title: 'Write workflow file', done: false }
-      ],
-      columnId: 'todo',
-      order: 1
-    }),
-    mk({
-      title: 'Design the onboarding flow',
-      description: 'Wireframe the first-run experience for new workspace members.',
-      priority: 'Low',
-      dueDate: shiftDate(today, 9),
-      assignees: ['u_editor', 'u_viewer'],
-      subtasks: [],
-      columnId: 'todo',
-      order: 2
-    }),
-    mk({
-      title: 'Build the Kanban drag-and-drop',
-      description: 'Implement native HTML5 drag and drop with reordering and keyboard fallback.',
-      priority: 'High',
-      dueDate: shiftDate(today, 1),
-      assignees: ['u_editor'],
-      subtasks: [
-        { id: makeId('sub'), title: 'Drag handlers on cards', done: true },
-        { id: makeId('sub'), title: 'Drop handlers on columns', done: true },
-        { id: makeId('sub'), title: 'Reorder within column', done: false },
-        { id: makeId('sub'), title: 'Keyboard move fallback', done: false }
-      ],
-      columnId: 'inprogress',
+      columnId: "todo",
       order: 0,
-      timeTracking: { totalSeconds: 5400, isRunning: false, startedAt: null, runningBy: null }
     }),
+
     mk({
-      title: 'Write API documentation',
-      description: 'Document the task and user endpoints for the internal wiki.',
-      priority: 'Medium',
+      title: "CI Pipeline Setup",
+      description: "Setup CI pipeline to run tests and build automatically.",
+      priority: "Medium",
+      dueDate: shiftDate(today, 5),
+      assignees: ["u_editor2"],
+      tech: ["GitHub Actions", "CI/CD", "Node.js"],
+      subtasks: [
+        { id: makeId("sub"), title: "Choose CI tool", done: true },
+        { id: makeId("sub"), title: "Create workflow file", done: false },
+      ],
+      columnId: "todo",
+      order: 1,
+    }),
+
+    mk({
+      title: "Onboarding UI Design",
+      description: "Create simple onboarding screens for new users.",
+      priority: "Low",
+      dueDate: shiftDate(today, 9),
+      assignees: ["u_editor", "u_viewer"],
+      tech: ["React", "CSS"],
+      subtasks: [
+        { id: makeId("sub"), title: "Design layout", done: false },
+        { id: makeId("sub"), title: "Add basic UI components", done: false },
+      ],
+      columnId: "todo",
+      order: 2,
+    }),
+
+    mk({
+      title: "Kanban Drag and Drop",
+      description: "Make tasks draggable between columns.",
+      priority: "High",
+      dueDate: shiftDate(today, 1),
+      assignees: ["u_editor"],
+      tech: ["React", "HTML5 Drag & Drop"],
+      subtasks: [
+        { id: makeId("sub"), title: "Drag task card", done: true },
+        { id: makeId("sub"), title: "Drop into column", done: true },
+        { id: makeId("sub"), title: "Fix reorder issue", done: false },
+      ],
+      columnId: "inprogress",
+      order: 0,
+      timeTracking: {
+        totalSeconds: 5400,
+        isRunning: false,
+        startedAt: null,
+        runningBy: null,
+      },
+    }),
+
+    mk({
+      title: "API Documentation",
+      description: "Write simple API documentation for backend.",
+      priority: "Medium",
       dueDate: shiftDate(today, 2),
-      assignees: ['u_editor2', 'u_owner'],
+      assignees: ["u_editor2", "u_owner"],
+      tech: ["Swagger", "Node.js"],
       subtasks: [
-        { id: makeId('sub'), title: 'Outline sections', done: true },
-        { id: makeId('sub'), title: 'Document task model', done: false }
+        { id: makeId("sub"), title: "Write endpoints list", done: true },
+        { id: makeId("sub"), title: "Add request examples", done: false },
       ],
-      columnId: 'inprogress',
-      order: 1
+      columnId: "inprogress",
+      order: 1,
     }),
+
     mk({
-      title: 'Review accessibility pass',
-      description: 'Audit focus order, color contrast and screen-reader labels across the board.',
-      priority: 'High',
+      title: "Accessibility Review",
+      description: "Check keyboard navigation and UI contrast.",
+      priority: "High",
       dueDate: shiftDate(today, 0),
-      assignees: ['u_owner', 'u_editor'],
+      assignees: ["u_owner", "u_editor"],
+      tech: ["HTML", "CSS", "Accessibility"],
       subtasks: [
-        { id: makeId('sub'), title: 'Keyboard navigation audit', done: true },
-        { id: makeId('sub'), title: 'Contrast check in high-contrast theme', done: true }
+        { id: makeId("sub"), title: "Check keyboard navigation", done: true },
+        { id: makeId("sub"), title: "Fix contrast issues", done: true },
       ],
-      columnId: 'review',
-      order: 0
+      columnId: "review",
+      order: 0,
     }),
+
     mk({
-      title: 'User testing feedback triage',
-      description: 'Go through usability session notes and convert findings into tickets.',
-      priority: 'Medium',
+      title: "User Feedback Review",
+      description: "Review user feedback and make task improvements.",
+      priority: "Medium",
       dueDate: shiftDate(today, -3),
-      assignees: ['u_viewer'],
+      assignees: ["u_viewer"],
+      tech: ["Product Thinking"],
       subtasks: [
-        { id: makeId('sub'), title: 'Tag findings by severity', done: true }
+        { id: makeId("sub"), title: "Read feedback", done: true },
+        { id: makeId("sub"), title: "Create improvement tasks", done: false },
       ],
-      columnId: 'review',
-      order: 1
+      columnId: "review",
+      order: 1,
     }),
+
     mk({
-      title: 'Project kickoff',
-      description: 'Initial planning meeting and charter sign-off.',
-      priority: 'Low',
+      title: "Project Setup Complete",
+      description: "Initial project setup and planning completed.",
+      priority: "Low",
       dueDate: shiftDate(today, -10),
-      assignees: ['u_owner', 'u_editor', 'u_editor2'],
+      assignees: ["u_owner", "u_editor"],
+      tech: ["Git", "Project Management"],
       subtasks: [
-        { id: makeId('sub'), title: 'Charter approved', done: true },
-        { id: makeId('sub'), title: 'Roles assigned', done: true }
+        { id: makeId("sub"), title: "Setup repo", done: true },
+        { id: makeId("sub"), title: "Assign roles", done: true },
       ],
-      columnId: 'done',
+      columnId: "done",
       order: 0,
       completedAt: Date.now() - 9 * 86400000,
-      timeTracking: { totalSeconds: 7200, isRunning: false, startedAt: null, runningBy: null }
+      timeTracking: {
+        totalSeconds: 7200,
+        isRunning: false,
+        startedAt: null,
+        runningBy: null,
+      },
     }),
-    mk({
-      title: 'Wireframe the login screen',
-      description: 'Low-fidelity wireframes for the authentication flow.',
-      priority: 'Low',
-      dueDate: shiftDate(today, -7),
-      assignees: ['u_editor'],
-      subtasks: [
-        { id: makeId('sub'), title: 'Sketch layout', done: true },
-        { id: makeId('sub'), title: 'Get sign-off', done: true }
-      ],
-      columnId: 'done',
-      order: 1,
-      completedAt: Date.now() - 6 * 86400000,
-      timeTracking: { totalSeconds: 3600, isRunning: false, startedAt: null, runningBy: null }
-    }),
-    mk({
-      title: 'Set up local-storage auth',
-      description: 'Username/password check against seeded users, with session persistence.',
-      priority: 'Medium',
-      dueDate: shiftDate(today, -5),
-      assignees: ['u_editor2'],
-      subtasks: [
-        { id: makeId('sub'), title: 'Seed demo accounts', done: true },
-        { id: makeId('sub'), title: 'Persist session', done: true }
-      ],
-      columnId: 'done',
-      order: 2,
-      completedAt: Date.now() - 4 * 86400000,
-      timeTracking: { totalSeconds: 4500, isRunning: false, startedAt: null, runningBy: null }
-    }),
-    mk({
-      title: 'Theme system (light / dark / high-contrast)',
-      description: 'CSS variable based theming with system preference detection.',
-      priority: 'Medium',
-      dueDate: shiftDate(today, -2),
-      assignees: ['u_owner'],
-      subtasks: [
-        { id: makeId('sub'), title: 'Detect prefers-color-scheme', done: true },
-        { id: makeId('sub'), title: 'Persist user choice', done: true },
-        { id: makeId('sub'), title: 'High-contrast palette', done: true }
-      ],
-      columnId: 'done',
-      order: 3,
-      completedAt: Date.now() - 1 * 86400000,
-      timeTracking: { totalSeconds: 6300, isRunning: false, startedAt: null, runningBy: null }
-    })
-  ]
+  ];
 }
