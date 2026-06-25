@@ -52,7 +52,7 @@ export function seedUsers() {
 // They never authenticate; they just animate presence + occasional task nudges.
 export const BOT_PERSONAS = [
   { id: "bot_1", name: "Ayesha (bot)", color: "#C53030" },
-  { id: "bot_2", name: "Usman (bot)", color: "#1A7A8A" },
+  { id: "bot_2", name: "Eman (bot)", color: "#1A7A8A" },
 ];
 
 export function seedTasks() {
@@ -173,7 +173,7 @@ export function seedTasks() {
       title: "Accessibility Review",
       description: "Check keyboard navigation and UI contrast.",
       priority: "High",
-      dueDate: shiftDate(today, 0),
+      dueDate: shiftDate(today, 1),
       assignees: ["u_owner", "u_editor"],
       tech: ["HTML", "CSS", "Accessibility"],
       subtasks: [
