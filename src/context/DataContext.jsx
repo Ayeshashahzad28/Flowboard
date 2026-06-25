@@ -28,13 +28,14 @@ const PRESENCE_HEARTBEAT_MS = 4000;
 const PRESENCE_TTL_MS = 13000;
 
 function ensureTasksSeeded() {
-  const existing = readJSON(KEYS.TASKS, null);
-  if (existing && Array.isArray(existing)) return existing;
-  const seeded = seedTasks();
-  writeJSON(KEYS.TASKS, seeded);
-  return seeded;
+  const existing = readJSON(KEYS.TASKS, null)
+  if (!existing || existing.length === 0) {
+    const seeded = seedTasks()
+    writeJSON(KEYS.TASKS, seeded)
+    return seeded
+  }
+  return existing
 }
-
 function reindex(tasks, columnId) {
   const inCol = tasks
     .filter((t) => t.columnId === columnId)
