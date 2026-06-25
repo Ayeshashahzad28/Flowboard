@@ -16,33 +16,31 @@ function AuthedApp() {
   const [view, setView] = useState("board");
 
   const resolvedView =
-    view === "team" && !can(currentUser.role, "manageUsers") ? "board" : view;
+    view === "team" && !can(currentUser.role, "manageUsers")
+      ? "board"
+      : view;
 
   return (
     <div className="app-shell">
       <a className="skip-link" href="#main-content">
         Skip to main content
       </a>
+
       <Navbar view={resolvedView} setView={setView} />
+
       <main id="main-content" className="app-main">
         {resolvedView === "board" && <BoardView />}
         {resolvedView === "analytics" && <AnalyticsDashboard tasks={tasks} />}
         {resolvedView === "team" && <UserManagementPanel />}
       </main>
-      <Toasts toasts={toasts} onDismiss={dismissToast} />
-    </div>
-  );
-}
 
-function AuthedApp() {
-  return (
-    <div className="app-shell">
-      ...
+      <Toasts toasts={toasts} onDismiss={dismissToast} />
+
       <footer className="app-footer">
         &copy; 2026 Flowboard. All Rights Reserved.
       </footer>
     </div>
-  )
+  );
 }
 
 function Gate() {

@@ -1356,6 +1356,7 @@ textarea {
   }
 }
 
+
 /* footer base */
 .app-footer {
   width: 100%;
@@ -1383,7 +1384,8 @@ textarea {
   color: #ffffff;
   border-top: 1px solid #ffffff;
 }
-/* footer responsiveness */
+
+/* responsive */
 @media (max-width: 768px) {
   .app-footer {
     font-size: 12px;
